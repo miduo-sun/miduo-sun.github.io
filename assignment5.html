@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Miduo Sun">
+<meta name="dcterms.date" content="2026-02-17">
+
+<title>Recreating a Poorly Designed Chart</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="assignment5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="assignment5_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="assignment5_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="assignment5_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="assignment5_files/libs/quarto-html/popper.min.js"></script>
+<script src="assignment5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="assignment5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="assignment5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="assignment5_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="assignment5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="assignment5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="assignment5_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Recreating a Poorly Designed Chart</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Miduo Sun <a href="mailto:miduo.sun@gwu.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            George Washington University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="analyzing-fatalities-in-traffic-crashes-by-race" class="level2">
+<h2 class="anchored" data-anchor-id="analyzing-fatalities-in-traffic-crashes-by-race">Analyzing Fatalities in Traffic Crashes By Race</h2>
+<p>I sometimes enjoy looking at a subreddit called <a href="https://www.reddit.com/r/dataisbeautiful/">r/dataisbeautiful</a>. Because literally anyone can post on the site, there are often people who create unclear, confusing, or even completely incorrect infographics.</p>
+<section id="the-misleading-graph" class="level3">
+<h3 class="anchored" data-anchor-id="the-misleading-graph">The misleading graph:</h3>
+<p><img src="misleading.jpeg" class="img-fluid"></p>
+<p>This graph depicts the fatality rates by race from the years 2017 to 2021, with AIAN (American Indian and Alaskan Native) most likely to be invovled in a traffic crash, and Asians least likely to be involved in a traffic trash.</p>
+<p><a href="https://www.reddit.com/r/dataisbeautiful/comments/1r3ry1n/oc_traffic_fatalities_by_race/">Here</a> is the link to the post, titled “[OC] Traffic fatalities by race,” posted on February 13, 2026.</p>
+<p>There are multiple items that could be improved in this graph:</p>
+<ul>
+<li>Though it shows fatality rate in crashes by race, it does not factor in the total number of drivers per race. Is it possible that Asian people appear to be in the least traffic crashes because they are less likely to have a license?</li>
+<li>Most people, including me, would not immediately understand the abbreviations “AIAN” and “NHPI.”</li>
+<li>The legend could be placed in alphabetical order, rather than a seemingly random order.</li>
+<li>Hispanic or Latino is not a race, but an ethnicity. However, this will be difficult for me to make changes.</li>
+<li>It is not color-blind friendly.</li>
+</ul>
+</section>
+</section>
+<section id="putting-together-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="putting-together-the-data">Putting Together the Data</h2>
+<section id="data-frame-fatality-rate-by-race" class="level3">
+<h3 class="anchored" data-anchor-id="data-frame-fatality-rate-by-race">Data Frame: Fatality Rate by Race</h3>
+<p>I first put together the data frame based on the original graph and used the melt function.</p>
+<div id="6922da4e-3cd9-4be8-8376-1151567211df" class="cell" data-execution_count="176">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>original_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Race"</span>: [<span class="st">"Asian"</span>, <span class="st">"American Indian and Alaska Native"</span>, <span class="st">"Black"</span>, <span class="st">"Hispanic or Latino"</span>, <span class="st">"Native Hawaiian or Pacific Islander"</span>, <span class="st">"White"</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2017"</span>: [<span class="fl">2.9</span>, <span class="fl">29.9</span>, <span class="fl">13.68</span>, <span class="fl">9.45</span>, <span class="fl">8.41</span>, <span class="fl">11.58</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2018"</span>: [<span class="dv">3</span>, <span class="fl">25.06</span>, <span class="fl">13.72</span>, <span class="fl">9.51</span>, <span class="fl">13.14</span>, <span class="fl">11.11</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2019"</span>: [<span class="fl">2.43</span>, <span class="fl">22.33</span>, <span class="fl">12.89</span>, <span class="fl">10.85</span>, <span class="fl">2.98</span>, <span class="fl">10.15</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2020"</span>: [<span class="fl">2.06</span>, <span class="fl">23.15</span>, <span class="fl">15.50</span>, <span class="fl">11.02</span>, <span class="fl">2.43</span>, <span class="fl">9.96</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2021"</span>: [<span class="fl">2.53</span>, <span class="fl">28.51</span>, <span class="fl">17.53</span>, <span class="fl">11.3</span>, <span class="fl">6.4</span>, <span class="dv">11</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>original_data <span class="op">=</span> original_data.melt(id_vars<span class="op">=</span><span class="st">'Race'</span>, value_vars<span class="op">=</span>[<span class="st">'2017'</span>, <span class="st">'2018'</span>, <span class="st">'2019'</span>, <span class="st">'2020'</span>, <span class="st">'2021'</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                                   var_name<span class="op">=</span><span class="st">'Year'</span>, value_name<span class="op">=</span><span class="st">'Fatality Rate per 100k Population'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>original_data[<span class="st">'Year'</span>] <span class="op">=</span> original_data[<span class="st">'Year'</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>original_data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="176">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian</td>
+<td>2017</td>
+<td>2.90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>American Indian and Alaska Native</td>
+<td>2017</td>
+<td>29.90</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.68</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.45</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Native Hawaiian or Pacific Islander</td>
+<td>2017</td>
+<td>8.41</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-1-finding-data-on-total-number-of-drivers" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-finding-data-on-total-number-of-drivers">Step 1: Finding Data on Total Number of Drivers</h2>
+<p>I believe that the biggest problem of the original graph is that it only factored in the total population of each race, and not the total number of drivers for each race. For example, it’s possible that the American Indian and Alaskan Natives have a smaller share of driving population compared to its total, which then may overstate the true risk among the total population.</p>
+<p>So, my first step is to normalize is by finding data on total number of drivers by race. The best data I could find was <a href="https://www.voteriders.org/wp-content/uploads/2023/04/CDCE_VoteRiders_ANES2020Report_Spring2023.pdf">here</a> on page 4.</p>
+<blockquote class="blockquote">
+<p>“24% of Hispanic, 21% of Black, 12% of Native American, Native Alaskan, or another race, 9% of Asian, Native Hawaiian, and other Pacific Islanders, and 8% of White voting-age citizens did not have a driver’s license.”</p>
+</blockquote>
+<p>It gave me percentages of those <em>without a driver’s license</em>, so here I created a data frame of unlicensed drivers:</p>
+<div id="13e73c25-c55d-482d-8133-994c56235d03" class="cell" data-execution_count="177">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>license_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Race"</span>: [<span class="st">"Asian, Native Hawaiian, and other Pacific Islander"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Black"</span>, <span class="st">"Hispanic or Latino"</span>,  <span class="st">"Native American, Native Alaskan, or another race"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">"White"</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Percent Unlicensed"</span>: [<span class="fl">0.09</span>, <span class="fl">0.21</span>, <span class="fl">0.24</span>, <span class="fl">0.12</span>, <span class="fl">0.08</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>license_data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="177">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>0.21</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>0.24</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>0.12</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>0.08</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Next, I change it to show those <em>with</em> a license:</p>
+<div id="2ad25c4d-8e38-4647-a530-7616240e5c22" class="cell" data-execution_count="178">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>license_data[<span class="st">"Percent Licensed"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> license_data[<span class="st">"Percent Unlicensed"</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>license_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="178">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+<th data-quarto-table-cell-role="th">Percent Licensed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>0.09</td>
+<td>0.91</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>0.21</td>
+<td>0.79</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>0.24</td>
+<td>0.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>0.12</td>
+<td>0.88</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>0.08</td>
+<td>0.92</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-a-road-bump" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-a-road-bump">Step 2: A road bump…</h2>
+<p>Here is my fatality rate by race data on the left, and my license data by race on the right.</p>
+<div id="b4676514-6cb8-4ccc-b9f4-954ac274ea26" class="cell" data-execution_count="179">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.concat([original_data.head(), license_data.head()], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="179">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+<th data-quarto-table-cell-role="th">Percent Licensed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian</td>
+<td>2017</td>
+<td>2.90</td>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>0.09</td>
+<td>0.91</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>American Indian and Alaska Native</td>
+<td>2017</td>
+<td>29.90</td>
+<td>Black</td>
+<td>0.21</td>
+<td>0.79</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.68</td>
+<td>Hispanic or Latino</td>
+<td>0.24</td>
+<td>0.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.45</td>
+<td>Native American, Native Alaskan, or another race</td>
+<td>0.12</td>
+<td>0.88</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Native Hawaiian or Pacific Islander</td>
+<td>2017</td>
+<td>8.41</td>
+<td>White</td>
+<td>0.08</td>
+<td>0.92</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Unfortunately, some of my race categories are different. The table on the left shows Asian and Native Hawaiian or Pacific Islander as two separate races, whereas the table on the right combines it all together. There are also some slight differences in naming the race, such as “American Indian and Alaska Native” on the left vs “Native American, Native Alaskan, or another race” on the right. Without the same race categories, I cannot make the join.</p>
+<p>Here is what I did next:</p>
+<section id="a.-combining-asian-and-american-indian-and-alaska-native-into-one" class="level4">
+<h4 class="anchored" data-anchor-id="a.-combining-asian-and-american-indian-and-alaska-native-into-one">a. Combining “Asian” and “American Indian and Alaska Native” into one</h4>
+<p>To do this, I decided to edit original_data and combine the two races. I had to find the combined fatality rate by assigning a weight (by population) to each. I found out that the NHPI population in 2020 was approximately 1.6 million, and the Asian population was approximately 19.9 million. I calculated this for Native Hawaiian and Pacific Islanders to have a weight of 0.08 and Asians to have a weight of 0.92. With the help of AI, I was able to combine the two races together into one category.</p>
+<div id="b22d3731-2188-4c3a-a9d2-2bb13413f17b" class="cell" data-execution_count="222">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(original_data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering for Asian / Native Hawaiian or Pacific Islander</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>asian <span class="op">=</span> df[df[<span class="st">"Race"</span>] <span class="op">==</span> <span class="st">"Asian"</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nhpi <span class="op">=</span> df[df[<span class="st">"Race"</span>] <span class="op">==</span> <span class="st">"Native Hawaiian or Pacific Islander"</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge by year and compute using weighted values</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    asian,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    nhpi,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    on<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    suffixes<span class="op">=</span>(<span class="st">"_asian"</span>, <span class="st">"_nhpi"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"Fatality Rate per 100k Population"</span>] <span class="op">=</span> (</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"Fatality Rate per 100k Population_asian"</span>] <span class="op">*</span> <span class="fl">0.92</span> <span class="op">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"Fatality Rate per 100k Population_nhpi"</span>] <span class="op">*</span> <span class="fl">0.08</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping and renaming needed columns</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> merged[[<span class="st">"Race_asian"</span>, <span class="st">"Year"</span>, <span class="st">"Fatality Rate per 100k Population"</span>]].copy()</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>combined[<span class="st">"Race_asian"</span>] <span class="op">=</span> <span class="st">"Asian, Native Hawaiian, and other Pacific Islander"</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> combined.rename(columns<span class="op">=</span>{<span class="st">"Race_asian"</span>: <span class="st">"Race"</span>})</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning data</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="op">=</span> df[<span class="op">~</span>df[<span class="st">"Race"</span>].isin(</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Asian"</span>, <span class="st">"Native Hawaiian or Pacific Islander"</span>]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="op">=</span> pd.concat([cleaned_data, combined], ignore_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="b.-slight-change-to-american-indian-and-alaska-native-name" class="level4">
+<h4 class="anchored" data-anchor-id="b.-slight-change-to-american-indian-and-alaska-native-name">b. Slight change to “American Indian and Alaska Native” name</h4>
+<div id="3c38044c-1bb6-4823-bacf-a89d9be7f0db" class="cell" data-execution_count="220">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cleaned_data[<span class="st">"Race"</span>] <span class="op">=</span> cleaned_data[<span class="st">"Race"</span>].replace(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"American Indian and Alaska Native"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Native American, Native Alaskan, or another race"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="op">=</span> cleaned_data.sort_values([<span class="st">"Year"</span>, <span class="st">"Race"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>cleaned_data.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="220">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>2017</td>
+<td>3.3408</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.6800</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.4500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>2017</td>
+<td>29.9000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>2017</td>
+<td>11.5800</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Now, here is the final product side by side:</p>
+<div id="7b7282c7-e144-4a9b-ae74-19ac378eed9f" class="cell" data-execution_count="202">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pd.concat([cleaned_data.head(), license_data.head()], axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="202">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+<th data-quarto-table-cell-role="th">Percent Licensed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>2017</td>
+<td>3.3408</td>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>0.09</td>
+<td>0.91</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.6800</td>
+<td>Black</td>
+<td>0.21</td>
+<td>0.79</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.4500</td>
+<td>Hispanic or Latino</td>
+<td>0.24</td>
+<td>0.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>2017</td>
+<td>29.9000</td>
+<td>Native American, Native Alaskan, or another race</td>
+<td>0.12</td>
+<td>0.88</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>2017</td>
+<td>11.5800</td>
+<td>White</td>
+<td>0.08</td>
+<td>0.92</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Success!</p>
+</section>
+</section>
+<section id="step-3-merge-and-calculate" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-merge-and-calculate">Step 3: Merge and Calculate!</h2>
+<p>For this step I started off by merging the two datasets by race.</p>
+<div id="eb37d6d8-87b2-45a1-b4d4-e9d44887369d" class="cell" data-execution_count="203">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.merge(cleaned_data, license_data, on<span class="op">=</span><span class="st">"Race"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>final.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="203">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+<th data-quarto-table-cell-role="th">Percent Licensed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>2017</td>
+<td>3.3408</td>
+<td>0.09</td>
+<td>0.91</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.6800</td>
+<td>0.21</td>
+<td>0.79</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.4500</td>
+<td>0.24</td>
+<td>0.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>2017</td>
+<td>29.9000</td>
+<td>0.12</td>
+<td>0.88</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>2017</td>
+<td>11.5800</td>
+<td>0.08</td>
+<td>0.92</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Then, I calculated the fatality rate per 100k licensed drivers!</p>
+<div id="1c910c3b-60a7-42bb-99c9-d1f85a0a11f0" class="cell" data-execution_count="204">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"Fatality per 100k Licensed Drivers"</span>] <span class="op">=</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    final[<span class="st">"Fatality Rate per 100k Population"</span>] <span class="op">/</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    final[<span class="st">"Percent Licensed"</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"Fatality per 100k Licensed Drivers"</span>] <span class="op">=</span> final[<span class="st">"Fatality per 100k Licensed Drivers"</span>].<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>final.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="204">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Race</th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Fatality Rate per 100k Population</th>
+<th data-quarto-table-cell-role="th">Percent Unlicensed</th>
+<th data-quarto-table-cell-role="th">Percent Licensed</th>
+<th data-quarto-table-cell-role="th">Fatality per 100k Licensed Drivers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Asian, Native Hawaiian, and other Pacific Isla...</td>
+<td>2017</td>
+<td>3.3408</td>
+<td>0.09</td>
+<td>0.91</td>
+<td>3.67</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Black</td>
+<td>2017</td>
+<td>13.6800</td>
+<td>0.21</td>
+<td>0.79</td>
+<td>17.32</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Hispanic or Latino</td>
+<td>2017</td>
+<td>9.4500</td>
+<td>0.24</td>
+<td>0.76</td>
+<td>12.43</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Native American, Native Alaskan, or another race</td>
+<td>2017</td>
+<td>29.9000</td>
+<td>0.12</td>
+<td>0.88</td>
+<td>33.98</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>White</td>
+<td>2017</td>
+<td>11.5800</td>
+<td>0.08</td>
+<td>0.92</td>
+<td>12.59</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-redesigning-the-graph" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-redesigning-the-graph">Step 4: Redesigning the Graph</h2>
+<div id="cd78bd03-f6ec-4585-90ef-92f36ea80e13" class="cell" data-execution_count="228">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">6</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Colorblind friendly palette</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Asian, Native Hawaiian, and other Pacific Islander"</span>: <span class="st">"#d7191c"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Black"</span>: <span class="st">"#fdae61"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hispanic or Latino"</span>: <span class="st">"#e8e866"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Native American, Native Alaskan, or another race"</span>: <span class="st">"#a5e4fa"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"White"</span>: <span class="st">"#2c7bb6"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># lines, dots, labels</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> race <span class="kw">in</span> final[<span class="st">"Race"</span>].unique():</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    race_data <span class="op">=</span> final[final[<span class="st">"Race"</span>] <span class="op">==</span> race]</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    plt.plot(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        race_data[<span class="st">"Year"</span>],</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        race_data[<span class="st">"Fatality per 100k Licensed Drivers"</span>],</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>colors.get(race),</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    plt.scatter(</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        race_data[<span class="st">"Year"</span>],</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        race_data[<span class="st">"Fatality per 100k Licensed Drivers"</span>],</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span>race,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>colors.get(race),</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span><span class="dv">60</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># resolving overlapping labels:</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(race_data)):</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> race_data[<span class="st">"Year"</span>].iloc[i]</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> race_data[<span class="st">"Fatality per 100k Licensed Drivers"</span>].iloc[i]</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        race_name <span class="op">=</span> race_data[<span class="st">"Race"</span>].iloc[i]</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> ((race_name <span class="op">==</span> <span class="st">"White"</span> <span class="kw">and</span> x <span class="op">==</span> <span class="dv">2017</span>) <span class="kw">or</span> (race_name <span class="op">==</span> <span class="st">"White"</span> <span class="kw">and</span> x <span class="op">==</span> <span class="dv">2018</span>)):</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            plt.text(x, y <span class="op">+</span> <span class="fl">0.3</span>, <span class="bu">round</span>(y, <span class="dv">1</span>), fontsize<span class="op">=</span><span class="dv">14</span>, ha<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mtick</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>plt.gca().xaxis.set_major_locator(mtick.MaxNLocator(integer<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Fatality Rate per 100k Licensed Drivers"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Fatality Rate per 100k Licensed Drivers by Race-Ethnicity, 2017-2021"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>plt.legend(bbox_to_anchor<span class="op">=</span>(<span class="fl">1.02</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignment5_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Surprisingly, the Native American, Native Alaskan or other race increased saw an even larger increase in the fatality rate even after normalizing. Overall, there is an slight increase (1-6) in numbers in all of the races throughout the years after normalization. Additionally, each race’s fatality rate per year remains relatively close each year, with the exception of Native American and Native Alaskan.</p>
+<section id="reflection" class="level3">
+<h3 class="anchored" data-anchor-id="reflection">Reflection</h3>
+<p>The original graph was misleading due to normalizing with the total population of each race, instead of the licensed population of each race. Visually, the original graph was not colorblind friendly and had a confusing legend with abbreviations that most people don’t understand. When designing my new graph, I wanted to make sure to handpick the colors using a colorblind friendly website and write out each of the abbreviations. And of course, in Step 2, I tried my best to find data and normalize the population by licensed drivers instead of total population.</p>
+<p>This assignment was surprisingly hard for me, and I understand that even my own final graph has its inaccuracies and needs improvement. For example, I tried my best to combine Asian and Native Hawaiian and Pacific Islander into one racial category by weighing the fatality rates (0.08 for NHPI and 0.92 for Asian), but that does not take into account the fluctuations between years. I also wasn’t able to solve the problem of “Hispanic or Latino” since it could double count with other races and I wouldn’t be able to know by how much. Overall, I hope my new graph can share slightly more accurate information than the original graph and be more visually friendly, easy to read, and appealing to all audiences.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
