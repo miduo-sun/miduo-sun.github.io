@@ -1,0 +1,21 @@
+.quarto-title-block {
+  background-image: url("stateless.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+
+  min-height: 500px;
+
+  padding-top: 20px;
+  padding-right: 200px;
+  padding-left: 20px;
+
+  text-align: left;
+  color: black;
+}
+
+.quarto-title-block * {
+  text-shadow:
+  0 0 8px rgba(255,255,255,0.7),
+  0 0 16px rgba(255,255,255,0.5);
+}
