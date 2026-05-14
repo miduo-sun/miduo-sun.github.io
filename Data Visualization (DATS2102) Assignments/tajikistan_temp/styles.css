@@ -1,0 +1,8 @@
+.quarto-title-block {
+  background-image: url("tajikistan.jpg");
+  background-size: cover;
+  background-position: top;
+  padding: 100px 0;
+  color: white;
+    text-align: center;   /* centers text */
+}
